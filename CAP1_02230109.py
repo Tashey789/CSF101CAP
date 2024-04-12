@@ -12,7 +12,7 @@
 ################################
 # SOLUTION
 # Solution Score:
-#
+#50267
 # number = 9
 ################################
 ## Read the input_9_CAP1.txt file
