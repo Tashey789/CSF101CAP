@@ -11,7 +11,7 @@
 #https://youtu.be/k2EahPgl0ho?si=bXuI1H7jLM3O0NzZ
 ################################
 # SOLUTION
-# Solution Score:
+# solution Score:
 #50267
 # number = 9
 ################################
@@ -19,40 +19,39 @@
 
 
 # Function to read input from a file and return a list of shape-outcome pairs
-def read_input(file_path):
-    with open(file_path, 'r') as file:
-        shape_outcome_pairs = [line.strip().split() for line in file]  # Split each line into shape-outcome pair
-    return shape_outcome_pairs
+def read_input(file_data):
+    with open(file_data, 'r') as file: 
+        game_data = [line.strip().split() for line in file]  # Split each line into shape-outcome pair
+    return game_data
 
-# Function to calculate the total score based on shape-outcome pairs
-def calculate_score(shape_outcome_pairs):
-    total_score = 0  # Initialize total score
-    # Calculate score based on the combination of shape and outcome
-    for shape, players_outcome in shape_outcome_pairs:  # Iterate over each shape-outcome pair
-        if shape == 'A' and players_outcome == 'X':
-            total_score += 3  # Add 3 to the total score if shape is A and outcome is X
-        elif shape == 'A' and players_outcome == 'Y':
-            total_score += 4  # Add 4 to the total score if shape is A and outcome is Y
-        elif shape == 'A' and players_outcome == 'Z':
-            total_score += 8  # Add 8 to the total score if shape is A and outcome is Z
-        elif shape == 'B' and players_outcome == 'X':
-            total_score += 1  # Add 1 to the total score if shape is B and outcome is X
-        elif shape == 'B' and players_outcome == 'Y':
-            total_score += 5  # Add 5 to the total score if shape is B and outcome is Y
-        elif shape == 'B' and players_outcome == 'Z':
-            total_score += 9  # Add 9 to the total score if shape is B and outcome is Z
-        elif shape == 'C' and players_outcome == 'X':
-            total_score += 2  # Add 2 to the total score if shape is C and outcome is X
-        elif shape == 'C' and players_outcome == 'Y':
-            total_score += 6  # Add 6 to the total score if shape is C and outcome is Y
-        elif shape == 'C' and players_outcome == 'Z':
-            total_score += 7  # Add 7 to the total score if shape is C and outcome is Z
-    return total_score  # Return the total score
+# Function to calculate the entire score based on game_data
+def calculate_score(game_data):
+    entire_score = 0  
+    for option, player_score in game_data:  
+        if option == 'A' and player_score == 'X': #rock, have to lose(0)
+            entire_score += 3  # scissor(3)+0
+        elif option == 'A' and player_score == 'Y': # rock, have to tie(3)
+            entire_score += 4  # rock(1)+3
+        elif option == 'A' and player_score == 'Z': #rock, have to win (6)
+            entire_score+= 8  # paper(2)+6
+        elif option == 'B' and player_score == 'X':#paper, have to lose
+            entire_score += 1  # rock(1)+0
+        elif option == 'B' and player_score == 'Y':# paper, tie
+            entire_score += 5  # paper(2)+3
+        elif option == 'B' and player_score == 'Z': # paper, have to win
+            entire_score += 9  # scissor(3) + 6
+        elif option == 'C' and player_score == 'X': #scissor, have to lose
+            entire_score += 2  # paper(2) + 0
+        elif option == 'C' and player_score == 'Y': # scissor, tie
+            entire_score += 6  # scissor(3) + 3
+        elif option == 'C' and player_score == 'Z': # scissor, have to win
+            entire_score += 7  # rock(1) + 6
+    return entire_score  # Return the entire score
 
-file_path = "CSF101CAP/input_9_cap1.txt"  # Path to the input file
+file_data = "CSF101CAP/input_9_cap1.txt" 
 
 # Read combinations from the file
-shape_outcome_pairs = read_input(file_path)  # Create a list of shape-outcome pairs
+game_data = read_input(file_data) 
 
-total_score = calculate_score(shape_outcome_pairs)  # Calculate total score using calculate_score function
-print("Total Score:", total_score)  # Print the total score
+entire_score = calculate_score(game_data)  
+print("Entire_score:", entire_score ) 
